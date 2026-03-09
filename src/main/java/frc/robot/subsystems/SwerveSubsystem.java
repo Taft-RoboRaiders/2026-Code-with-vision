@@ -135,7 +135,7 @@ catch (Exception e) {
 
  public void setupLimelight() {
      swerveDrive.stopOdometryThread();
-     limelight = new Limelight("raider");
+     limelight = new Limelight("limelight-raider");
      limelight
      .getSettings()
      .withPipelineIndex(0)
@@ -347,7 +347,7 @@ public SwerveInputStream buildRelativeTurningStream() {
     Optional<PoseEstimate> poseEstimates =
     limelightPoseEstimator.getPoseEstimate();
     Optional<LimelightResults> results = limelight.getLatestResults();
-    if (results.isPresent() /* && poseEstimates.isPresent()*/) {
+    if (results.isPresent()  && poseEstimates.isPresent()) {
     LimelightResults result = results.get();
     PoseEstimate poseEstimate = poseEstimates.get();
     SmartDashboard.putNumber("limelight/Avg Tag Ambiguity",
