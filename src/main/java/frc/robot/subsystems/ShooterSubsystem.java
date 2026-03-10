@@ -1,15 +1,17 @@
 package frc.robot.subsystems;
+
 import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.RPM;
+
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import frc.robot.Constants;
 import com.revrobotics.spark.SparkMax;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import java.util.function.Supplier;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import yams.gearing.GearBox;
 import yams.gearing.MechanismGearing;
 import yams.motorcontrollers.SmartMotorController;
@@ -20,9 +22,10 @@ import yams.motorcontrollers.SmartMotorControllerConfig.TelemetryVerbosity;
 import yams.motorcontrollers.local.SparkWrapper;
 
 
-public class ShooterSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase
+{
 
-  private final SparkMax flywheelMotor = new SparkMax(Constants.IDConstants.Shooter_Left_ID, MotorType.kBrushless);
+  private final SparkMax flywheelMotor  = new SparkMax(Constants.IDConstants.Shooter_Left_ID, MotorType.kBrushless);
   private final SparkMax flywheelMotor2 = new SparkMax(Constants.IDConstants.Shooter_Right_ID, MotorType.kBrushless);
 
   private final SmartMotorControllerConfig motorConfig = new SmartMotorControllerConfig(this)
@@ -31,74 +34,92 @@ public class ShooterSubsystem extends SubsystemBase {
       .withIdleMode(MotorMode.COAST)
       .withStatorCurrentLimit(Amps.of(60))
       .withMotorInverted(true)
-      .withFeedforward(new SimpleMotorFeedforward(0.10,0.123 ,0.015))
+      .withFeedforward(new SimpleMotorFeedforward(0.10, 0.123, 0.015))
       .withControlMode(ControlMode.CLOSED_LOOP);
 
   private final SmartMotorController motor2 = new SparkWrapper(flywheelMotor2, DCMotor.getNEO(1), motorConfig.clone()
-          .withMotorInverted(false)
-          .withFeedforward(new SimpleMotorFeedforward(0.125, 0.127, 0.015))
-          .withClosedLoopController(0.008,0,0.02)
+                                                                                                             .withMotorInverted(
+                                                                                                                 false)
+                                                                                                             .withFeedforward(
+                                                                                                                 new SimpleMotorFeedforward(
+                                                                                                                     0.125,
+                                                                                                                     0.127,
+                                                                                                                     0.015))
+                                                                                                             .withClosedLoopController(
+                                                                                                                 0.008,
+                                                                                                                 0,
+                                                                                                                 0.02)
 
-          .withTelemetry("FlywheelMotor2", TelemetryVerbosity.HIGH)
-          );
-  private final SmartMotorController motor = new SparkWrapper(flywheelMotor, DCMotor.getNEO(2), 
-          motorConfig.withTelemetry("FlyWheelMotor", TelemetryVerbosity.HIGH));
+                                                                                                             .withTelemetry(
+                                                                                                                 "FlywheelMotor2",
+                                                                                                                 TelemetryVerbosity.HIGH)
+  );
+  private final SmartMotorController motor  = new SparkWrapper(flywheelMotor, DCMotor.getNEO(2),
+                                                               motorConfig.withTelemetry("FlyWheelMotor",
+                                                                                         TelemetryVerbosity.HIGH));
 
 
-
-  
-  public ShooterSubsystem() {
-      flywheelMotor.pauseFollowerMode();
-      flywheelMotor2.pauseFollowerMode();
+  public ShooterSubsystem()
+  {
+    flywheelMotor.pauseFollowerMode();
+    flywheelMotor2.pauseFollowerMode();
   }
 
 
-  public AngularVelocity getFlywheel1Velocity() {
+  public AngularVelocity getFlywheel1Velocity()
+  {
     return motor.getMechanismVelocity();
   }
 
-  public AngularVelocity getFlywheel2Velocity() {
+  public AngularVelocity getFlywheel2Velocity()
+  {
     return motor2.getMechanismVelocity();
   }
 
-  public Command setVelocity(AngularVelocity speed) {
-    return run(()->motor.setVelocity(speed));
+  public Command setVelocity(AngularVelocity speed)
+  {
+    return run(() -> motor.setVelocity(speed));
   }
 
-  public Command setDutyCycle(double dutyCycle) {
-    return run(()->motor.setDutyCycle(dutyCycle));
+  public Command setDutyCycle(double dutyCycle)
+  {
+    return run(() -> motor.setDutyCycle(dutyCycle));
   }
 
-  public Command setVelocity(Supplier<AngularVelocity> speed) {
-    return run(()->motor.setVelocity(speed.get()));
+  public Command setVelocity(Supplier<AngularVelocity> speed)
+  {
+    return run(() -> motor.setVelocity(speed.get()));
   }
 
-  public Command setDutyCycle(Supplier<Double> dutyCycle) {
-    return run(()->motor.setDutyCycle(dutyCycle.get()));
+  public Command setDutyCycle(Supplier<Double> dutyCycle)
+  {
+    return run(() -> motor.setDutyCycle(dutyCycle.get()));
   }
 
 
-public void setTargetRPM(double rpm) {
+  public void setTargetRPM(double rpm)
+  {
 
-   motor.setVelocity(RPM.of(rpm));
-   motor2.setVelocity(RPM.of(rpm));
-}
+    motor.setVelocity(RPM.of(rpm));
+    motor2.setVelocity(RPM.of(rpm));
+  }
 
-public void stop() {
+  public void stop()
+  {
 
     motor.setDutyCycle(0);
     motor2.setDutyCycle(0);
-}
+  }
 
-public void periodic()
-{
-  motor.updateTelemetry();
-  motor2.updateTelemetry();
-}
+  public void periodic()
+  {
+    motor.updateTelemetry();
+    motor2.updateTelemetry();
+  }
 
-public void simulationPeriodic()
-{
-  motor.simIterate();
-  motor2.simIterate();
-}
+  public void simulationPeriodic()
+  {
+    motor.simIterate();
+    motor2.simIterate();
+  }
 }

@@ -4,11 +4,15 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.SwerveSubsystem;
 
-/** An example command that uses an example subsystem. */
-public class ExampleCommand extends Command {
+/**
+ * An example command that uses an example subsystem.
+ */
+public class ExampleCommand extends Command
+{
+
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final SwerveSubsystem m_subsystem;
 
@@ -17,7 +21,8 @@ public class ExampleCommand extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(SwerveSubsystem subsystem) {
+  public ExampleCommand(SwerveSubsystem subsystem)
+  {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -37,7 +42,8 @@ public class ExampleCommand extends Command {
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished()
+  {
     return false;
   }
 }
