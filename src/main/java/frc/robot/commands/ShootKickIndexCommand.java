@@ -51,7 +51,7 @@ public class ShootKickIndexCommand extends Command
     this.swerve = Optional.empty();
     this.goalRPM = goalRPM1;   // <-- store parameter
 
-    addRequirements(kicker, indexer);
+    addRequirements(shooter, kicker, indexer);
   }
 
   public ShootKickIndexCommand(
@@ -72,7 +72,7 @@ public class ShootKickIndexCommand extends Command
       calculatedGoalRPM.put(shot.distance.in(Meters), shot.shooterSpeed.in(RPM));
       calculatedTOF.put(shot.distance.in(Meters), shot.tof.in(Second));
     }
-    addRequirements(kicker, indexer);
+    addRequirements(shooter, kicker, indexer);
   }
 
   @Override
@@ -110,11 +110,11 @@ public class ShootKickIndexCommand extends Command
 
     if (shooterReady)
     {
-      kicker.setTargetRPM(Constants.KickerConstants.KickerGoalRPM);
+      kicker.runKicker(0.8);
       indexer.runIndexer(Constants.IndexConstants.IndexSpeed);
     } else
     {
-      kicker.setTargetRPM(Constants.KickerConstants.KickerGoalRPM);
+      kicker.runKicker(0);
       indexer.stopIndexer();
     }
   }
@@ -123,7 +123,7 @@ public class ShootKickIndexCommand extends Command
   public void end(boolean interrupted)
   {
     shooter.stop();
-    kicker.setDutyCycle(0);
+    kicker.stopKicker();
     indexer.stopIndexer();
   }
 

@@ -5,21 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "MoveToInitial"
-          }
-        },
-        {
           "type": "named",
           "data": {
-            "name": "AlignToTarget"
+            "name": "NEARSHOOT"
           }
         }
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }

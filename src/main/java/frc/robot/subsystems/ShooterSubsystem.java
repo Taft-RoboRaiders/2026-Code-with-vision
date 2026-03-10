@@ -28,41 +28,34 @@ public class ShooterSubsystem extends SubsystemBase
   private final SparkMax flywheelMotor  = new SparkMax(Constants.IDConstants.Shooter_Left_ID, MotorType.kBrushless);
   private final SparkMax flywheelMotor2 = new SparkMax(Constants.IDConstants.Shooter_Right_ID, MotorType.kBrushless);
 
+  private final SmartMotorControllerConfig motorConfig2 = new SmartMotorControllerConfig(this)
+      .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
+      .withIdleMode(MotorMode.COAST)
+      .withStatorCurrentLimit(Amps.of(80))
+      .withMotorInverted(true)
+      .withControlMode(ControlMode.CLOSED_LOOP)
+      .withMotorInverted(false)
+      .withFeedforward(new SimpleMotorFeedforward(0.125,0.127,0.015))
+      .withClosedLoopController(0.008,0,0.02)
+      .withTelemetry("FlywheelMotor2",TelemetryVerbosity.HIGH);
+
+  private final SmartMotorController motor2 = new SparkWrapper(flywheelMotor2, DCMotor.getNEO(1), motorConfig2);
   private final SmartMotorControllerConfig motorConfig = new SmartMotorControllerConfig(this)
       .withClosedLoopController(0.015, 0, 0.1)
       .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
       .withIdleMode(MotorMode.COAST)
-      .withStatorCurrentLimit(Amps.of(60))
+      .withStatorCurrentLimit(Amps.of(80))
       .withMotorInverted(true)
       .withFeedforward(new SimpleMotorFeedforward(0.10, 0.123, 0.015))
-      .withControlMode(ControlMode.CLOSED_LOOP);
-
-  private final SmartMotorController motor2 = new SparkWrapper(flywheelMotor2, DCMotor.getNEO(1), motorConfig.clone()
-                                                                                                             .withMotorInverted(
-                                                                                                                 false)
-                                                                                                             .withFeedforward(
-                                                                                                                 new SimpleMotorFeedforward(
-                                                                                                                     0.125,
-                                                                                                                     0.127,
-                                                                                                                     0.015))
-                                                                                                             .withClosedLoopController(
-                                                                                                                 0.008,
-                                                                                                                 0,
-                                                                                                                 0.02)
-
-                                                                                                             .withTelemetry(
-                                                                                                                 "FlywheelMotor2",
-                                                                                                                 TelemetryVerbosity.HIGH)
-  );
-  private final SmartMotorController motor  = new SparkWrapper(flywheelMotor, DCMotor.getNEO(2),
-                                                               motorConfig.withTelemetry("FlyWheelMotor",
-                                                                                         TelemetryVerbosity.HIGH));
+      .withControlMode(ControlMode.CLOSED_LOOP)
+      .withTelemetry("FlyWheelMotor",TelemetryVerbosity.HIGH)
+      .withLooselyCoupledFollowers(motor2);
+  
+  private final SmartMotorController motor  = new SparkWrapper(flywheelMotor, DCMotor.getNEO(1), motorConfig);
 
 
   public ShooterSubsystem()
   {
-    flywheelMotor.pauseFollowerMode();
-    flywheelMotor2.pauseFollowerMode();
   }
 
 
@@ -101,7 +94,7 @@ public class ShooterSubsystem extends SubsystemBase
   {
 
     motor.setVelocity(RPM.of(rpm));
-    motor2.setVelocity(RPM.of(rpm));
+    // motor2.setVelocity(RPM.of(rpm));
   }
 
   public void stop()

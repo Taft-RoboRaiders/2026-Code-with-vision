@@ -104,7 +104,7 @@ public final class Constants
 
     public static final double FARShooterGoalRPM   = 3800;
     public static final double NEARShooterGoalRPM  = 3400;
-    public static final double ShooterToleranceRPM = 100;
+    public static final double ShooterToleranceRPM = 50;
     public static final double Shooter_Speed       = -0.7;
     public static final double kShooterRampRate    = 0.1;
   }
@@ -130,7 +130,7 @@ public final class Constants
 
     public static final double KickSpeed          = -0.5;
     public static final double KickerGoalRPM      = 1000;
-    public static final double KickerToleranceRPM = 100;
+    public static final double KickerToleranceRPM = 1000;
   }
 
   public static class DriveConstants

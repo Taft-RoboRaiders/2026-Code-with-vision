@@ -105,6 +105,10 @@ public class RobotContainer
     NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(135)));
     NamedCommands.registerCommand("INTAKEUP", Intake.setAngle(Degrees.of(0)));
     NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(0.7).withTimeout(8));
+    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3600).withTimeout(10));
+    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3800).withTimeout(10));
+     
+
     NamedCommands.registerCommand("SHAKE", ShakeIntake.shake(Intake));
     NamedCommands.registerCommand("ShootIndexKick",
                                   new ShootKickIndexCommand(Shooter, Kicker, Indexer, 4000).withTimeout(10));
@@ -127,7 +131,7 @@ public class RobotContainer
     IntakeSpin.setDefaultCommand(IntakeSpin.stopIntakeCommand());
     Shooter.setDefaultCommand(Shooter.setDutyCycle(0));
     Indexer.setDefaultCommand(Indexer.stopIndexerCommand());
-    Kicker.setDefaultCommand(Kicker.setDutyCycle(0));
+    Kicker.setDefaultCommand(Kicker.runKickerCommand(0));
   }
 
   /**
@@ -156,7 +160,7 @@ public class RobotContainer
 
     // INTAKE CONTROLS
 
-    leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(145)));
+    leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(125)));
     leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
 
 //driverXbox.a().whileTrue( Intake.armCmd(0.5));  //DUTY CYCLE JUST INCASE SETPOINTS MES UP
@@ -180,6 +184,8 @@ public class RobotContainer
                                                        Indexer,
                                                        Constants.ShooterConstants.NEARShooterGoalRPM));
 
+    driverXbox.start().and(driverXbox.back()).onTrue(drivebase.zeroGyroWtihAlliance());
+
 //driverXbox.pov(270).whileTrue(Climber.armCmd(-1));
 //driverXbox.pov(270).whileFalse(Climber.armCmd(0));
 
@@ -196,7 +202,7 @@ public class RobotContainer
   {
     // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
     //return autoChooser.getSelected();
-    return drivebase.getAutonomousCommand("CenterShoot");
+    return drivebase.getAutonomousCommand("Straight Auto");
   }
 
 }

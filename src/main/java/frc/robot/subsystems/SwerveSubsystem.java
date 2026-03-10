@@ -136,13 +136,13 @@ public class SwerveSubsystem extends SubsystemBase
         .withCameraOffset(
             new Pose3d(
                 Units.inchesToMeters(13),
-                Units.inchesToMeters(13.5),
+                Units.inchesToMeters(0),
                 Units.inchesToMeters(22.5),
-                new Rotation3d(0, 30, Units.degreesToRadians(180))))
+                new Rotation3d(0,Units.degreesToRadians(30),0)))
         .withAprilTagIdFilter(List.of(25, 26, 19, 10, 18, 27, 21, 24, 5, 8, 2, 11))
         .save();
     limelightPoseEstimator =
-        limelight.createPoseEstimator(EstimationMode.MEGATAG2);
+        limelight.createPoseEstimator(EstimationMode.MEGATAG1);
   }
 
   public SwerveInputStream buildDefaultStream()
@@ -346,7 +346,7 @@ public class SwerveSubsystem extends SubsystemBase
         .getSettings()
         .withRobotOrientation(
             new Orientation3d(
-                new Rotation3d(swerveDrive.getOdometryHeading().rotateBy(Rotation2d.kZero)),
+                new Rotation3d(swerveDrive.getOdometryHeading().rotateBy(Rotation2d.k180deg)),
                 new AngularVelocity3d(DegreesPerSecond.of(0), DegreesPerSecond.of(0), DegreesPerSecond.of(0))))
         .save();
 
@@ -378,36 +378,21 @@ public class SwerveSubsystem extends SubsystemBase
       {
         Pose2d estimatorPose = poseEstimate.pose.toPose2d();
         Pose2d usefulPose    = result.getBotPose2d(Alliance.Blue);
-        double distanceToPose =
-            usefulPose.getTranslation().getDistance(swerveDrive.getPose().getTranslation());
-        if (distanceToPose < 0.5
-            || (outofAreaReading > 10)
-            || (outofAreaReading > 10 && !initialReading))
-        {
-          if (!initialReading)
-          {
-            initialReading = true;
-          }
           outofAreaReading = 0;
-          if (lastLLTimestamp != result.timestamp_RIOFPGA_capture)
+          if (lastLLTimestamp != poseEstimate.timestampSeconds)
           {
-            var stdDevScale = Math.pow(result.botpose_avgdist, 2.0) / result.botpose_tagcount;
+            // var stdDevScale = Math.pow(result.botpose_avgdist, 2.0) / result.botpose_tagcount;
             // stdDevScale = distance^2/tagsInView
-            swerveDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.05 * stdDevScale,
-                                                                    0.05 * stdDevScale,
-                                                                    0.022 * stdDevScale));
-            swerveDrive.addVisionMeasurement(usefulPose,
-                                             result.timestamp_RIOFPGA_capture);
-            lastLLTimestamp = result.timestamp_RIOFPGA_capture;
+            // swerveDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.05 * stdDevScale,
+                                                                    // 0.05 * stdDevScale,
+                                                                    // 0.022 * stdDevScale));
+           swerveDrive.addVisionMeasurement(estimatorPose,
+                                            poseEstimate.timestampSeconds);
+            lastLLTimestamp = poseEstimate.timestampSeconds;
           }
-        } else
-        {
-          outofAreaReading += 1;
-        }
-        swerveDrive.addVisionMeasurement(estimatorPose,
-                                         poseEstimate.timestampSeconds);
+        } 
       }
-    }
+
   }
 
   @Override
@@ -639,5 +624,16 @@ public class SwerveSubsystem extends SubsystemBase
 
     SmartDashboard.putNumber("AutoShootRPM/distance/meters", dist);
     return dist;
+  }
+
+  public Command zeroGyroWtihAlliance()
+  {
+    return runOnce(()->{
+      swerveDrive.zeroGyro();
+      if(DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue) == DriverStation.Alliance.Red)
+      {
+        swerveDrive.resetOdometry(new Pose2d(swerveDrive.getPose().getTranslation(), Rotation2d.k180deg));
+      }
+    });
   }
 }
