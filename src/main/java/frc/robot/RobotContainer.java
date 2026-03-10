@@ -102,7 +102,7 @@ public class RobotContainer
 
     //Set up auto commands
 
-    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(145)));
+    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(135)));
     NamedCommands.registerCommand("INTAKEUP", Intake.setAngle(Degrees.of(0)));
     NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(0.7).withTimeout(8));
     NamedCommands.registerCommand("SHAKE", ShakeIntake.shake(Intake));

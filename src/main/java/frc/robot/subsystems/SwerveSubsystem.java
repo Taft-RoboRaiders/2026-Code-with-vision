@@ -138,7 +138,7 @@ public class SwerveSubsystem extends SubsystemBase
                 Units.inchesToMeters(13),
                 Units.inchesToMeters(13.5),
                 Units.inchesToMeters(22.5),
-                new Rotation3d(0, 0, Units.degreesToRadians(30))))
+                new Rotation3d(0, 30, Units.degreesToRadians(180))))
         .withAprilTagIdFilter(List.of(25, 26, 19, 10, 18, 27, 21, 24, 5, 8, 2, 11))
         .save();
     limelightPoseEstimator =

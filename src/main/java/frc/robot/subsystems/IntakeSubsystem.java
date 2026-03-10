@@ -40,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase
   private final SmartMotorControllerConfig motorConfig = new SmartMotorControllerConfig(this)
       .withClosedLoopController(5, 0, 0.05)//, DegreesPerSecond.of(20), DegreesPerSecondPerSecond.of(20))  
       .withSoftLimit(Degrees.of(5), Degrees.of(140))
-      .withGearing(new MechanismGearing(GearBox.fromReductionStages(66.6667)))
+      .withGearing(new MechanismGearing(GearBox.fromReductionStages(57.78)))
       .withIdleMode(MotorMode.BRAKE)
       .withTelemetry("IntakeMotor", TelemetryVerbosity.HIGH)
       .withStatorCurrentLimit(Amps.of(40))

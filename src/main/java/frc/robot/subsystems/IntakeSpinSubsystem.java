@@ -21,7 +21,7 @@ public class IntakeSpinSubsystem extends SubsystemBase
 
   private final SmartMotorControllerConfig smcConfig = new SmartMotorControllerConfig(this)
       .withControlMode(ControlMode.OPEN_LOOP)
-      .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
+      .withGearing(new MechanismGearing(GearBox.fromReductionStages(3)))
       .withTelemetry("IntakeSpinMotor", TelemetryVerbosity.HIGH)
       .withMotorInverted(true)
       .withIdleMode(MotorMode.COAST)
