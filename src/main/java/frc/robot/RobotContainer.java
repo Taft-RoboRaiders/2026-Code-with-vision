@@ -82,9 +82,9 @@ public class RobotContainer
    */
 
   private final Trigger rightTriggerDeadband =
-      new Trigger(() -> driverXbox.getRightTriggerAxis() > TRIGGER_DEADBAND);
+      new Trigger(() -> driverXbox.getRightTriggerAxis() *0.6 > TRIGGER_DEADBAND);
   private final Trigger leftTriggerDeadband =
-      new Trigger(() -> driverXbox.getLeftTriggerAxis() > TRIGGER_DEADBAND);
+      new Trigger(() -> driverXbox.getLeftTriggerAxis() * 0.6 > TRIGGER_DEADBAND);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -174,11 +174,11 @@ public class RobotContainer
                        .onFalse(IntakeSpin.stopIntakeCommand());
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 //SHOOTER KICKER INDEXER CONTROLS
-    //driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
-    driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter,
+    driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
+   /*  driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter,
                                                                      Kicker,
                                                                      Indexer,
-                                                                     Constants.ShooterConstants.FARShooterGoalRPM));
+                                                                     Constants.ShooterConstants.FARShooterGoalRPM));*/
     driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter,
                                                        Kicker,
                                                        Indexer,

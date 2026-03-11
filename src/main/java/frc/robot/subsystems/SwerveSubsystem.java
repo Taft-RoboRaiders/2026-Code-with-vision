@@ -341,6 +341,7 @@ public class SwerveSubsystem extends SubsystemBase
   @Override
   public void periodic()
   {
+    outofAreaReading = 0;
     swerveDrive.updateOdometry();
     limelight
         .getSettings()
@@ -357,42 +358,44 @@ public class SwerveSubsystem extends SubsystemBase
     {
       LimelightResults result       = results.get();
       PoseEstimate     poseEstimate = poseEstimates.get();
-      SmartDashboard.putNumber("limelight/Avg Tag Ambiguity",
-                               poseEstimate.getAvgTagAmbiguity());
-      SmartDashboard.putNumber("limelight/Min Tag Ambiguity",
-                               poseEstimate.getMinTagAmbiguity());
-      SmartDashboard.putNumber("limelight/Max Tag Ambiguity",
-                               poseEstimate.getMaxTagAmbiguity());
-      SmartDashboard.putNumber("limelight/Avg Distance", poseEstimate.avgTagDist);
-      SmartDashboard.putNumber("limelight/Avg Tag Area", poseEstimate.avgTagArea);
-      SmartDashboard.putNumber("limelight/Odom/Pose/x", swerveDrive.getPose().getX());
-      SmartDashboard.putNumber("limelight/Odom/Pose/y", swerveDrive.getPose().getY());
-      SmartDashboard.putNumber(
-          "limlelight/Odom/Pose/degrees", swerveDrive.getPose().getRotation().getDegrees());
-      SmartDashboard.putNumber("limelight/Pose/x", poseEstimate.pose.getX());
-      SmartDashboard.putNumber("limelight/Pose/y", poseEstimate.pose.getY());
-      SmartDashboard.putNumber(
-          "limelight/Pose/degrees",
-          poseEstimate.pose.toPose2d().getRotation().getDegrees());
+      // SmartDashboard.putNumber("limelight/Avg Tag Ambiguity",
+      //                          poseEstimate.getAvgTagAmbiguity());
+      // SmartDashboard.putNumber("limelight/Min Tag Ambiguity",
+      //                          poseEstimate.getMinTagAmbiguity());
+      // SmartDashboard.putNumber("limelight/Max Tag Ambiguity",
+      //                          poseEstimate.getMaxTagAmbiguity());
+      // SmartDashboard.putNumber("limelight/Avg Distance", poseEstimate.avgTagDist);
+      // SmartDashboard.putNumber("limelight/Avg Tag Area", poseEstimate.avgTagArea);
+      // SmartDashboard.putNumber("limelight/Odom/Pose/x", swerveDrive.getPose().getX());
+      // SmartDashboard.putNumber("limelight/Odom/Pose/y", swerveDrive.getPose().getY());
+      // SmartDashboard.putNumber(
+      //     "limlelight/Odom/Pose/degrees", swerveDrive.getPose().getRotation().getDegrees());
+      // SmartDashboard.putNumber("limelight/Pose/x", poseEstimate.pose.getX());
+      // SmartDashboard.putNumber("limelight/Pose/y", poseEstimate.pose.getY());
+      // SmartDashboard.putNumber(
+      //     "limelight/Pose/degrees",
+      //     poseEstimate.pose.toPose2d().getRotation().getDegrees());
       if (result.valid)
       {
         Pose2d estimatorPose = poseEstimate.pose.toPose2d();
         Pose2d usefulPose    = result.getBotPose2d(Alliance.Blue);
-          outofAreaReading = 0;
+        if(poseEstimate.getAvgTagAmbiguity() > 0.5 && poseEstimate.tagCount > 1){
           if (lastLLTimestamp != poseEstimate.timestampSeconds)
           {
-            // var stdDevScale = Math.pow(result.botpose_avgdist, 2.0) / result.botpose_tagcount;
+            var stdDevScale = Math.pow(poseEstimate.avgTagDist, 2.0) / poseEstimate.tagCount;
             // stdDevScale = distance^2/tagsInView
-            // swerveDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.05 * stdDevScale,
-                                                                    // 0.05 * stdDevScale,
-                                                                    // 0.022 * stdDevScale));
+            // swerveDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.09 * stdDevScale,
+                                                                    // 0.023 * stdDevScale,
+                                                                  //  0.07 * stdDevScale));
            swerveDrive.addVisionMeasurement(estimatorPose,
                                             poseEstimate.timestampSeconds);
             lastLLTimestamp = poseEstimate.timestampSeconds;
           }
         } 
       }
-
+      }
+      // TODO: Remove me
+      distanceToHub();
   }
 
   @Override

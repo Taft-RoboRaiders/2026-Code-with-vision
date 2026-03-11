@@ -32,8 +32,17 @@ public class ShootKickIndexCommand extends Command
   private final Debouncer shootDebounce2 = new Debouncer(0.3, DebounceType.kFalling);
   private final List<RecordedShot>         shots             = List.of(
       // TUNE HERE
-      new RecordedShot(Meters.of(1), RPM.of(4000), Second.of(1)),
-      new RecordedShot(Meters.of(1), RPM.of(4000), Second.of(1))
+      new RecordedShot(Meters.of(3.445), RPM.of(3600), Second.of(0.71)),
+      new RecordedShot(Meters.of(4.571), RPM.of(4000), Second.of(1.04)),
+      new RecordedShot(Meters.of(3.4527), RPM.of(3550), Second.of(0.78)),
+      new RecordedShot(Meters.of(4.06), RPM.of(3800), Second.of(0.83)),
+      new RecordedShot(Meters.of(4.638), RPM.of(4000), Second.of(1.08)),
+      new RecordedShot(Meters.of(2.65135), RPM.of(3450), Second.of(0.64)),
+      new RecordedShot(Meters.of(2.867095988657588), RPM.of(3300), Second.of(0.62))
+
+
+          
+        
 
                                                                       );
   private final InterpolatingDoubleTreeMap calculatedGoalRPM = new InterpolatingDoubleTreeMap();
@@ -84,7 +93,7 @@ public class ShootKickIndexCommand extends Command
   @Override
   public void execute()
   {
-
+    
     double goalRPM1 = goalRPM;
     if (swerve.isPresent())
     {

@@ -35,7 +35,7 @@ public class ShooterSubsystem extends SubsystemBase
       .withMotorInverted(true)
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withMotorInverted(false)
-      .withFeedforward(new SimpleMotorFeedforward(0.125,0.127,0.015))
+      .withFeedforward(new SimpleMotorFeedforward(0.125,0.125,0.015))
       .withClosedLoopController(0.008,0,0.02)
       .withTelemetry("FlywheelMotor2",TelemetryVerbosity.HIGH);
 
