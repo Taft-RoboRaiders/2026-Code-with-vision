@@ -175,10 +175,10 @@ public class RobotContainer
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 //SHOOTER KICKER INDEXER CONTROLS
     driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
-    /*driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter,
+    driverXbox.x().whileTrue(new ShootKickIndexCommand(Shooter,
                                                                      Kicker,
                                                                      Indexer,
-                                                                     Constants.ShooterConstants.FARShooterGoalRPM));*/
+                                                                     Constants.ShooterConstants.FARShooterGoalRPM));
     driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter,
                                                        Kicker,
                                                        Indexer,

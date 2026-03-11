@@ -30,7 +30,7 @@ public class AutoAimCommand extends Command
     swerveInputStream.aim(AllianceFlipUtil.apply(new Pose2d(Hub.topCenterPoint.toTranslation2d(), Rotation2d.kZero)))
                      .aimWhile(true)
                      .aimHeadingOffset(Rotation2d.k180deg)
-                     .scaleTranslation(0.3);
+                     .scaleTranslation(0.5);
 
   }
 
