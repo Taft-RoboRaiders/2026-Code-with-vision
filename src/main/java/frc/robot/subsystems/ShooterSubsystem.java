@@ -4,7 +4,7 @@ import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.RPM;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.units.measure.AngularVelocity;
@@ -25,8 +25,8 @@ import yams.motorcontrollers.local.SparkWrapper;
 public class ShooterSubsystem extends SubsystemBase
 {
 
-  private final SparkMax flywheelMotor  = new SparkMax(Constants.IDConstants.Shooter_Left_ID, MotorType.kBrushless);
-  private final SparkMax flywheelMotor2 = new SparkMax(Constants.IDConstants.Shooter_Right_ID, MotorType.kBrushless);
+  private final SparkFlex flywheelMotor  = new SparkFlex(Constants.IDConstants.Shooter_Left_ID, MotorType.kBrushless);
+  private final SparkFlex flywheelMotor2 = new SparkFlex(Constants.IDConstants.Shooter_Right_ID, MotorType.kBrushless);
 
   private final SmartMotorControllerConfig motorConfig2 = new SmartMotorControllerConfig(this)
       .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
@@ -34,8 +34,8 @@ public class ShooterSubsystem extends SubsystemBase
       .withStatorCurrentLimit(Amps.of(80))
       .withMotorInverted(true)
       .withControlMode(ControlMode.CLOSED_LOOP)
-      .withMotorInverted(false)
-      .withFeedforward(new SimpleMotorFeedforward(0.125,0.125,0.015))
+      .withMotorInverted(true)
+      .withFeedforward(new SimpleMotorFeedforward(0.12,0.105,0.15))
       .withClosedLoopController(0.015,0,0.04)
       .withTelemetry("FlywheelMotor2",TelemetryVerbosity.HIGH);
 
@@ -45,8 +45,8 @@ public class ShooterSubsystem extends SubsystemBase
       .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
       .withIdleMode(MotorMode.COAST)
       .withStatorCurrentLimit(Amps.of(80))
-      .withMotorInverted(true)
-      .withFeedforward(new SimpleMotorFeedforward(0.10, 0.123, 0.015))
+      .withMotorInverted(false)
+      .withFeedforward(new SimpleMotorFeedforward(0.18, 0.105, 0.15))
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withTelemetry("FlyWheelMotor",TelemetryVerbosity.HIGH)
       .withLooselyCoupledFollowers(motor2);

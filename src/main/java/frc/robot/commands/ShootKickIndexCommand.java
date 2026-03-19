@@ -94,7 +94,7 @@ public class ShootKickIndexCommand extends Command
       calculatedGoalRPM.put(shot.distance.in(Meters), shot.shooterSpeed.in(RPM));
       calculatedTOF.put(shot.distance.in(Meters), shot.tof.in(Second));
     }
-    addRequirements(shooter, kicker, indexer);
+    addRequirements(kicker, indexer, shooter);
   }
 
   @Override

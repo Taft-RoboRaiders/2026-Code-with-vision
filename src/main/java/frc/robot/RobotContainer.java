@@ -169,12 +169,15 @@ public class RobotContainer
     leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(135)));
     leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
 
+driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(-0.8).alongWith(Kicker.runKickerCommand(-0.7)));
+driverXbox.povUp().whileFalse(Indexer.runIndexerCommand(0.8).alongWith(Kicker.runKickerCommand(0.7)));
 
 //driverXbox.x().onTrue(ShakeIntake.shake(Intake));
-driverXbox.y().whileTrue(Intake.armCmd(-0.2));
+//driverXbox.y().whileTrue(Intake.armCmd(-0.2));
 driverXbox.a().whileTrue(Intake.armCmd(0.2));
-driverXbox.y().whileFalse(Intake.armCmd(0));
+//driverXbox.y().whileFalse(Intake.armCmd(0));
 driverXbox.a().whileFalse(Intake.armCmd(0));
+
 driverXbox.leftBumper().whileTrue(IntakeSpin.runIntakeCommand(1));
 driverXbox.leftBumper().whileFalse(IntakeSpin.runIntakeCommand(0));
     leftTriggerDeadband.whileTrue(IntakeSpin.runIntakeCommand(1))  //RUN INTAKE

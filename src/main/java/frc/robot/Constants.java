@@ -89,8 +89,8 @@ public final class Constants
   public static class IDConstants
   {
 
-    public static final int Shooter_Left_ID   = 10;
-    public static final int Shooter_Right_ID  = 9;
+    public static final int Shooter_Left_ID   = 9;
+    public static final int Shooter_Right_ID  = 10;
     public static final int IntakearmMotor_ID = 11;
     public static final int IntakeMotor_ID    = 12;
     public static final int IndexerMotor_ID   = 13;
@@ -104,7 +104,7 @@ public final class Constants
 
     public static final double FARShooterGoalRPM   = 3800;
     public static final double NEARShooterGoalRPM  = 3400;
-    public static final double ShooterToleranceRPM = 50;
+    public static final double ShooterToleranceRPM = 100;
     public static final double Shooter_Speed       = -0.7;
     public static final double kShooterRampRate    = 0.1;
   }
