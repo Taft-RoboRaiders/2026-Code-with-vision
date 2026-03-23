@@ -38,8 +38,8 @@ public class IntakeSubsystem extends SubsystemBase
 
   //Will tune this on Bot, Sim isnt being nice with YAMS arm tuning
   private final SmartMotorControllerConfig motorConfig = new SmartMotorControllerConfig(this)
-      .withClosedLoopController(5, 0, 0.05)//, DegreesPerSecond.of(20), DegreesPerSecondPerSecond.of(20))  
-      .withSoftLimit(Degrees.of(5), Degrees.of(140))
+      .withClosedLoopController(3, 0, 0.05)//, DegreesPerSecond.of(20), DegreesPerSecondPerSecond.of(20))  
+      .withSoftLimit(Degrees.of(10), Degrees.of(110))
       .withGearing(new MechanismGearing(GearBox.fromReductionStages(66.6667)))
       .withIdleMode(MotorMode.BRAKE)
       .withTelemetry("IntakeMotor", TelemetryVerbosity.HIGH)
@@ -56,7 +56,7 @@ public class IntakeSubsystem extends SubsystemBase
 
   private final ArmConfig m_config = new ArmConfig(motor)
       .withLength(Meters.of(0.135))
-      .withHardLimit(Degrees.of(0), Degrees.of(145))
+      .withHardLimit(Degrees.of(0), Degrees.of(125))
       .withTelemetry("IntakeArm", TelemetryVerbosity.HIGH)
       .withMass(Pounds.of(10))
       .withStartingPosition(Degrees.of(0));

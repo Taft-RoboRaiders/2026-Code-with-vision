@@ -166,7 +166,7 @@ public class RobotContainer
 
     // INTAKE CONTROLS
 
-    leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(135)));
+    leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(120)));
     leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
 
 driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(-0.8).alongWith(Kicker.runKickerCommand(-0.7)));
