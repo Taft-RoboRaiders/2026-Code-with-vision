@@ -133,7 +133,7 @@ public class ShootKickIndexCommand extends Command
 
     if (shooterReady)
     {
-      kicker.runKicker(0.7);
+      kicker.runKicker(Constants.KickerConstants.KickSpeed);
       indexer.runIndexer(Constants.IndexConstants.IndexSpeed);
     } else
     {

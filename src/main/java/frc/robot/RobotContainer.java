@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Autonomous.Auto;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoAimCommand;
+import frc.robot.commands.IntakeToggleCommand;
 import frc.robot.commands.ShakeIntake;
 import frc.robot.commands.ShootKickIndexCommand;
 import frc.robot.subsystems.CameraSubsystem;
@@ -134,7 +135,7 @@ public class RobotContainer
   //Setting default commands
   public void defaultCommands()
   {
-    IntakeSpin.setDefaultCommand(IntakeSpin.stopIntakeCommand());
+    IntakeSpin.setDefaultCommand(IntakeSpin.run(() -> {}));
     Shooter.setDefaultCommand(Shooter.setDutyCycle(0));
     Indexer.setDefaultCommand(Indexer.stopIndexerCommand());
     Kicker.setDefaultCommand(Kicker.runKickerCommand(0));
@@ -166,22 +167,27 @@ public class RobotContainer
 
     // INTAKE CONTROLS
 
-    leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(120)));
-    leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
+    //leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(120)));
+    //leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
 
-driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(-0.8).alongWith(Kicker.runKickerCommand(-0.7)));
-driverXbox.povUp().whileFalse(Indexer.runIndexerCommand(0.8).alongWith(Kicker.runKickerCommand(0.7)));
+driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(-1).alongWith(Kicker.runKickerCommand(1))); //backup incase shooter encoders break
+driverXbox.povUp().whileTrue(Indexer.runIndexerCommand(-1).alongWith(Kicker.runKickerCommand(1)));
 
-//driverXbox.x().onTrue(ShakeIntake.shake(Intake));
-//driverXbox.y().whileTrue(Intake.armCmd(-0.2));
-driverXbox.a().whileTrue(Intake.armCmd(0.2));
-//driverXbox.y().whileFalse(Intake.armCmd(0));
+// DUTY CYCLE INTAKE INCASE SETPOINTS BREAK
+driverXbox.a().whileTrue(Intake.armCmd(0.3));
 driverXbox.a().whileFalse(Intake.armCmd(0));
+driverXbox.y().whileTrue(Intake.armCmd(-0.3));
+driverXbox.y().whileFalse(Intake.armCmd(0));
 
-driverXbox.leftBumper().whileTrue(IntakeSpin.runIntakeCommand(1));
-driverXbox.leftBumper().whileFalse(IntakeSpin.runIntakeCommand(0));
-    leftTriggerDeadband.whileTrue(IntakeSpin.runIntakeCommand(1))  //RUN INTAKE
-    .onFalse(IntakeSpin.stopIntakeCommand());
+// SPIN INTAKE INCASE SETPOINS FAIL
+driverXbox.leftTrigger(0.2).whileTrue(IntakeSpin.runIntakeCommand(1)); 
+driverXbox.leftTrigger(0.2).whileFalse(IntakeSpin.runIntakeCommand(0));
+
+//INTAKE COMMAND
+   /* leftTriggerDeadband.toggleOnTrue(IntakeSpin.runIntakeCommand(1))  
+    .onFalse(IntakeSpin.stopIntakeCommand());*/
+   driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake, IntakeSpin));
+//AUTO AIM TO HUB COMMAND
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 //SHOOTER KICKER INDEXER CONTROLS
     driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
@@ -196,6 +202,9 @@ driverXbox.leftBumper().whileFalse(IntakeSpin.runIntakeCommand(0));
 
     driverXbox.start().and(driverXbox.back()).onTrue(drivebase.zeroGyroWtihAlliance());
 
+
+    //SHAKE COMMAND 
+    driverXbox.pov(270).onTrue(ShakeIntake.shake(Intake));
 //driverXbox.pov(270).whileTrue(Climber.armCmd(-1));
 //driverXbox.pov(270).whileFalse(Climber.armCmd(0));
 

@@ -128,7 +128,7 @@ public final class Constants
   public static class KickerConstants
   {
 
-    public static final double KickSpeed          = -0.5;
+    public static final double KickSpeed          = 1;
     public static final double KickerGoalRPM      = 1000;
     public static final double KickerToleranceRPM = 1500;
   }
