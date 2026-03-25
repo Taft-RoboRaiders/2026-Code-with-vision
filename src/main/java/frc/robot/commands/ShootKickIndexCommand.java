@@ -32,6 +32,7 @@ public class ShootKickIndexCommand extends Command
   private final Debouncer shootDebounce2 = new Debouncer(0.3, DebounceType.kFalling);
   private final List<RecordedShot>         shots             = List.of(
       // TUNE HERE
+      //NEED TO TUNE AGAIN WITH FLEX'S
       new RecordedShot(Meters.of(2.65135), RPM.of(3450), Second.of(0.64)),
       new RecordedShot(Meters.of(2.867095988657588), RPM.of(3300), Second.of(0.68)),
       new RecordedShot(Meters.of(3.445), RPM.of(3500), Second.of(0.71)),

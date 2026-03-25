@@ -12,7 +12,7 @@ public class ShakeIntake {
         // sequence back and forth and repeat
         return Commands.sequence(
                 intake.setAngle(Degrees.of(100)).withTimeout(0.5),
-                intake.setAngle(Degrees.of(50)).withTimeout(0.5)
+                intake.setAngle(Degrees.of(30)).withTimeout(0.5)
         ).repeatedly().withTimeout(2.5); // shake for 2.5 seconds
     }
 }

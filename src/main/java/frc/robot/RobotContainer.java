@@ -9,7 +9,6 @@ import static edu.wpi.first.units.Units.Degrees;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,7 +29,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.systems.field.FieldConstants;
 import swervelib.SwerveInputStream;
 
 
@@ -71,9 +69,9 @@ public class RobotContainer
   private final        ShooterSubsystem         Shooter          = new ShooterSubsystem();
   private final        KickerSubsystem          Kicker           = new KickerSubsystem();
   private final        IndexerSubsystem         Indexer          = new IndexerSubsystem();
-  //private final ClimberSubsystem               Climber    = new ClimberSubsystem();
+  //private final ClimberSubsystem               Climber    = new ClimberSubsystem();   SC..SC...SCRAPPEDDDDD
   private final        IntakeSpinSubsystem      IntakeSpin       = new IntakeSpinSubsystem();
-  private final        CameraSubsystem          cameraSubsystem  = new CameraSubsystem();
+  private final        CameraSubsystem          cameraSubsystem  = new CameraSubsystem();  
   // Establish a Sendable Chooser that will be able to be sent to the SmartDashboard, allowing selection of desired auto
   private final        SendableChooser<Command> autoChooser      = new SendableChooser<>();
   private final        Auto                     m_auto           = new Auto(drivebase, Shooter, Intake);
@@ -83,7 +81,8 @@ public class RobotContainer
    */
 
   private final Trigger rightTriggerDeadband =
-      new Trigger(() -> driverXbox.getRightTriggerAxis() > TRIGGER_DEADBAND);
+      new Trigger(() -> driverXbox.getRightTriggerAxis() > TRIGGER_DEADBAND); 
+     //These are lowkey useless but its just a trigger with a deaband
   private final Trigger leftTriggerDeadband =
       new Trigger(() -> driverXbox.getLeftTriggerAxis() > TRIGGER_DEADBAND);
 
@@ -112,10 +111,7 @@ public class RobotContainer
     NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3900).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
-
-     
-     
-
+    NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake,IntakeSpin).withTimeout(1));
     NamedCommands.registerCommand("SHAKE", ShakeIntake.shake(Intake));
     NamedCommands.registerCommand("ShootIndexKick",
                                   new ShootKickIndexCommand(Shooter, Kicker, Indexer, 4000).withTimeout(10));
@@ -123,9 +119,12 @@ public class RobotContainer
 
     //Set the default auto (do nothing)
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
-    autoChooser.addOption("Straight", AutoBuilder.buildAuto("Straight Auto"));
-    autoChooser.addOption("ShootClimbCenter", AutoBuilder.buildAuto("CenterShootAndClimb"));
-    autoChooser.addOption("Drive Forward", drivebase.driveForward().withTimeout(1));
+    autoChooser.addOption("LeftBumpAutoBlue", AutoBuilder.buildAuto("LeftBumpAutoBlue"));
+    autoChooser.addOption("RightBumpAutoBlue", AutoBuilder.buildAuto("RightBumpAutoBlue"));
+    autoChooser.addOption("StraightAutoBlue", AutoBuilder.buildAuto("StraigtAutoBLUE"));
+    autoChooser.addOption("DepotBlue", AutoBuilder.buildAuto("DepotBLUE"));
+    autoChooser.addOption("CenterAutoLeftBumpBlue", AutoBuilder.buildAuto("BlueOverLeftBump"));
+    autoChooser.addOption("Drive Forward", drivebase.driveForward().withTimeout(1)); //BASIC DRIVE FORWARD
     //Put the autoChooser on the SmartDashboard
     SmartDashboard.putData("Auto Chooser", autoChooser);
 
@@ -179,37 +178,36 @@ driverXbox.a().whileFalse(Intake.armCmd(0));
 driverXbox.y().whileTrue(Intake.armCmd(-0.3));
 driverXbox.y().whileFalse(Intake.armCmd(0));
 
-// SPIN INTAKE INCASE SETPOINS FAIL
-//driverXbox.leftTrigger(0.2).whileTrue(IntakeSpin.runIntakeCommand(1)); 
-//driverXbox.leftTrigger(0.2).whileFalse(IntakeSpin.runIntakeCommand(0));
 
 //INTAKE COMMAND
-   /* leftTriggerDeadband.toggleOnTrue(IntakeSpin.runIntakeCommand(1))  
-    .onFalse(IntakeSpin.stopIntakeCommand());*/
 driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake,IntakeSpin));
-//driverXbox.leftBumper().whileTrue(IntakeSpin.runIntakeCommand(1));
-//driverXbox.leftBumper().whileFalse(IntakeSpin.runIntakeCommand(0));
+
 //AUTO AIM TO HUB COMMAND
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
+
 //SHOOTER KICKER INDEXER CONTROLS
+//AUTO RPM SHOOT
     driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
    
+    //SHOOT FROM TOWER
     driverXbox.x().whileTrue(new ShootKickIndexCommand(Shooter,
                                                                      Kicker,
                                                                      Indexer,
                                                                      Constants.ShooterConstants.FARShooterGoalRPM));
+    //SHOOT FROM CLOSE
     driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter,
                                                        Kicker,
                                                        Indexer,
                                                        Constants.ShooterConstants.NEARShooterGoalRPM));
 
+                                            
+//RESET HYRO FOR FOD
     driverXbox.start().and(driverXbox.back()).onTrue(drivebase.zeroGyroWtihAlliance());
 
 
     //SHAKE COMMAND 
     driverXbox.pov(270).onTrue(ShakeIntake.shake(Intake));
-//driverXbox.pov(270).whileTrue(Climber.armCmd(-1));
-//driverXbox.pov(270).whileFalse(Climber.armCmd(0));
+
 
   }
 
@@ -224,7 +222,8 @@ driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake,IntakeSpin));
   {
     // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
     //return autoChooser.getSelected();
-    return drivebase.getAutonomousCommand("DepotBLUE");
+   // return drivebase.getAutonomousCommand("DepotBLUE");   // CHANGE THIS TO CHANGE THE AUTO
+     return autoChooser.getSelected();
   }
 
 }
