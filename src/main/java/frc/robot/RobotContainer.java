@@ -135,7 +135,7 @@ public class RobotContainer
   //Setting default commands
   public void defaultCommands()
   {
-    IntakeSpin.setDefaultCommand(IntakeSpin.run(() -> {}));
+   IntakeSpin.setDefaultCommand(IntakeSpin.run(() -> {}));
     Shooter.setDefaultCommand(Shooter.setDutyCycle(0));
     Indexer.setDefaultCommand(Indexer.stopIndexerCommand());
     Kicker.setDefaultCommand(Kicker.runKickerCommand(0));
@@ -180,17 +180,20 @@ driverXbox.y().whileTrue(Intake.armCmd(-0.3));
 driverXbox.y().whileFalse(Intake.armCmd(0));
 
 // SPIN INTAKE INCASE SETPOINS FAIL
-driverXbox.leftTrigger(0.2).whileTrue(IntakeSpin.runIntakeCommand(1)); 
-driverXbox.leftTrigger(0.2).whileFalse(IntakeSpin.runIntakeCommand(0));
+//driverXbox.leftTrigger(0.2).whileTrue(IntakeSpin.runIntakeCommand(1)); 
+//driverXbox.leftTrigger(0.2).whileFalse(IntakeSpin.runIntakeCommand(0));
 
 //INTAKE COMMAND
    /* leftTriggerDeadband.toggleOnTrue(IntakeSpin.runIntakeCommand(1))  
     .onFalse(IntakeSpin.stopIntakeCommand());*/
-   driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake, IntakeSpin));
+driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake,IntakeSpin));
+//driverXbox.leftBumper().whileTrue(IntakeSpin.runIntakeCommand(1));
+//driverXbox.leftBumper().whileFalse(IntakeSpin.runIntakeCommand(0));
 //AUTO AIM TO HUB COMMAND
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 //SHOOTER KICKER INDEXER CONTROLS
     driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
+   
     driverXbox.x().whileTrue(new ShootKickIndexCommand(Shooter,
                                                                      Kicker,
                                                                      Indexer,

@@ -35,7 +35,7 @@ public class ShooterSubsystem extends SubsystemBase
       .withMotorInverted(true)
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withMotorInverted(true)
-      .withFeedforward(new SimpleMotorFeedforward(0.12,0.105,0.15))
+      .withFeedforward(new SimpleMotorFeedforward(0.12,0.106,0.15))
       .withClosedLoopController(0.015,0,0.04)
       .withTelemetry("FlywheelMotor2",TelemetryVerbosity.HIGH);
 
@@ -46,7 +46,7 @@ public class ShooterSubsystem extends SubsystemBase
       .withIdleMode(MotorMode.COAST)
       .withStatorCurrentLimit(Amps.of(80))
       .withMotorInverted(false)
-      .withFeedforward(new SimpleMotorFeedforward(0.18, 0.105, 0.15))
+      .withFeedforward(new SimpleMotorFeedforward(0.18, 0.104, 0.15))
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withTelemetry("FlyWheelMotor",TelemetryVerbosity.HIGH)
       .withLooselyCoupledFollowers(motor2);
