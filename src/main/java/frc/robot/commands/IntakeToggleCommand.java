@@ -9,15 +9,15 @@ import frc.robot.subsystems.IntakeSpinSubsystem;
 public class IntakeToggleCommand extends Command {
 
     private final IntakeSubsystem intake;
-    private final IntakeSpinSubsystem spin;
+    //private final IntakeSpinSubsystem spin;
 
     // true = deployed, false = stowed
     private boolean deployed;
 
-    public IntakeToggleCommand(IntakeSubsystem intake, IntakeSpinSubsystem spin) {
+    public IntakeToggleCommand(IntakeSubsystem intake/* , IntakeSpinSubsystem spin*/) {
         this.intake = intake;
-        this.spin = spin;
-        addRequirements(intake, spin);
+       // this.spin = spin;
+        addRequirements(intake/* , spin*/);
 
         // start in stowed
         deployed = false;
@@ -31,10 +31,10 @@ public class IntakeToggleCommand extends Command {
         if (deployed) {
             // schedule the arm command ONCE
             intake.setAngle(Degrees.of(120)).schedule();
-            spin.runIntake(1);
+           // spin.runIntake(1);
         } else {
             intake.setAngle(Degrees.of(0)).schedule();
-            spin.stopIntake();
+           // spin.stopIntake();
         }
     }
 

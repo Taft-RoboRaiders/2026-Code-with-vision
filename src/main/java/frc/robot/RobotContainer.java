@@ -111,7 +111,7 @@ public class RobotContainer
     NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3900).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
-    NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake,IntakeSpin).withTimeout(1));
+    NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake/* ,IntakeSpin*/).withTimeout(1));
     NamedCommands.registerCommand("SHAKE", ShakeIntake.shake(Intake));
     NamedCommands.registerCommand("ShootIndexKick",
                                   new ShootKickIndexCommand(Shooter, Kicker, Indexer, 4000).withTimeout(10));
@@ -121,7 +121,7 @@ public class RobotContainer
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("LeftBumpAutoBlue", AutoBuilder.buildAuto("LeftBumpAutoBlue"));
     autoChooser.addOption("RightBumpAutoBlue", AutoBuilder.buildAuto("RightBumpAutoBlue"));
-    autoChooser.addOption("StraightAutoBlue", AutoBuilder.buildAuto("StraigtAutoBLUE"));
+    autoChooser.addOption("StraightAutoBLUE", AutoBuilder.buildAuto("StraigtAutoBLUE"));
     autoChooser.addOption("DepotBlue", AutoBuilder.buildAuto("DepotBLUE"));
     autoChooser.addOption("CenterAutoLeftBumpBlue", AutoBuilder.buildAuto("BlueOverLeftBump"));
     autoChooser.addOption("Drive Forward", drivebase.driveForward().withTimeout(1)); //BASIC DRIVE FORWARD
@@ -180,8 +180,9 @@ driverXbox.y().whileFalse(Intake.armCmd(0));
 
 
 //INTAKE COMMAND
-driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake,IntakeSpin));
-
+driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake/* ,IntakeSpin*/));
+driverXbox.leftTrigger().whileTrue(IntakeSpin.runIntakeCommand(1));
+driverXbox.leftTrigger().whileTrue(IntakeSpin.runIntakeCommand(0));
 //AUTO AIM TO HUB COMMAND
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 
