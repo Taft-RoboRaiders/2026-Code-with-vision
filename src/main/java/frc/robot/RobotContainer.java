@@ -169,8 +169,8 @@ public class RobotContainer
     //leftTriggerDeadband.toggleOnTrue(Intake.setAngle(Degrees.of(120)));
     //leftTriggerDeadband.toggleOnFalse(Intake.setAngle(Degrees.of(0)));
 
-driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(-1).alongWith(Kicker.runKickerCommand(1))); //backup incase shooter encoders break
-driverXbox.povUp().whileTrue(Indexer.runIndexerCommand(-1).alongWith(Kicker.runKickerCommand(1)));
+driverXbox.povUp().whileTrue(Indexer.runIndexerCommand(-1).alongWith(Kicker.runKickerCommand(1))); //backup incase shooter encoders break
+driverXbox.povDown().whileTrue(Indexer.runIndexerCommand(1).alongWith(Kicker.runKickerCommand(-1)));
 
 // DUTY CYCLE INTAKE INCASE SETPOINTS BREAK
 driverXbox.a().whileTrue(Intake.armCmd(0.3));
@@ -182,7 +182,7 @@ driverXbox.y().whileFalse(Intake.armCmd(0));
 //INTAKE COMMAND
 driverXbox.leftBumper().onTrue(new IntakeToggleCommand(Intake/* ,IntakeSpin*/));
 driverXbox.leftTrigger().whileTrue(IntakeSpin.runIntakeCommand(1));
-driverXbox.leftTrigger().whileTrue(IntakeSpin.runIntakeCommand(0));
+driverXbox.leftTrigger().whileFalse(IntakeSpin.runIntakeCommand(0));
 //AUTO AIM TO HUB COMMAND
     driverXbox.rightBumper().whileTrue(new AutoAimCommand(drivebase));
 
