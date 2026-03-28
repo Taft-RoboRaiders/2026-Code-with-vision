@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 5.928102710413694,
-        "y": 5.555292439372327
+        "x": 5.979857346647646,
+        "y": 5.749372325249644
       },
       "prevControl": {
-        "x": 4.928102710413694,
-        "y": 5.555292439372327
+        "x": 4.979857346647646,
+        "y": 5.749372325249644
       },
       "nextControl": null,
       "isLocked": true,
@@ -48,7 +48,7 @@
   "folder": "BUMPPATHS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 136.12330271407555
+    "rotation": 137.07003065304116
   },
   "useDefaultConstraints": false
 }
