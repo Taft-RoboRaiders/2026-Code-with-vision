@@ -58,10 +58,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -47.21109397717108
+    "rotation": -46.72179953410781
   },
   "reversed": false,
-  "folder": "BUMPPATHS",
+  "folder": "BlueBUMPPATHS",
   "idealStartingState": {
     "velocity": 0.8,
     "rotation": -50.630682757635164

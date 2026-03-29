@@ -4,8 +4,9 @@
   "holonomicMode": true,
   "pathFolders": [
     "Blue",
-    "BUMPPATHS",
-    "RED"
+    "BlueBUMPPATHS",
+    "RED",
+    "BlueRIGHTBUMPPATHS"
   ],
   "autoFolders": [
     "BLUE",

@@ -107,7 +107,7 @@ public class RobotContainer
     NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(1).withTimeout(5));
     NamedCommands.registerCommand("NOSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 0).withTimeout(2));
     NamedCommands.registerCommand("STOPINTAKE", IntakeSpin.runIntakeCommand(0));
-    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3450).withTimeout(12));
+    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3700).withTimeout(12));
     NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3800).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
@@ -121,9 +121,10 @@ public class RobotContainer
     autoChooser.setDefaultOption("Do Nothing", Commands.none());
     autoChooser.addOption("LeftBumpAutoBlue", AutoBuilder.buildAuto("LeftBumpAutoBlue"));
     autoChooser.addOption("RightBumpAutoBlue", AutoBuilder.buildAuto("RightBumpAutoBlue"));
-    autoChooser.addOption("StraightAutoBLUE", AutoBuilder.buildAuto("StraigtAutoBLUE"));
+    autoChooser.addOption("StraightAutoBLUE", AutoBuilder.buildAuto("StraightAutoBLUE"));
     autoChooser.addOption("DepotBlue", AutoBuilder.buildAuto("DepotBLUE"));
     autoChooser.addOption("CenterAutoLeftBumpBlue", AutoBuilder.buildAuto("BlueOverLeftBump"));
+        autoChooser.addOption("RightOverBumpBlue", AutoBuilder.buildAuto("RightOverBumpBlue"));
     autoChooser.addOption("Drive Forward", drivebase.driveForward().withTimeout(1)); //BASIC DRIVE FORWARD
     //Put the autoChooser on the SmartDashboard
     SmartDashboard.putData("Auto Chooser", autoChooser);

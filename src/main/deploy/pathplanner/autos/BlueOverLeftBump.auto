@@ -11,7 +11,7 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -19,14 +19,7 @@
                 "data": {
                   "pathName": "MoveToFuel"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
+              },
               {
                 "type": "named",
                 "data": {
@@ -38,24 +31,24 @@
                 "data": {
                   "name": "INTAKE"
                 }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "GrabFuel"
+                }
               },
               {
-                "type": "sequential",
+                "type": "path",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "GrabFuel"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "BackOverBump"
-                      }
-                    }
-                  ]
+                  "pathName": "BackOverBump"
                 }
               }
             ]

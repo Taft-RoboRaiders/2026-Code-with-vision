@@ -5,16 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "GoToDepotBLUE"
-                }
-              }
-            ]
+            "pathName": "GoOverBump"
           }
         },
         {
@@ -24,7 +17,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "GoIntoDepotBLUE"
+                  "pathName": "GoToFuel"
                 }
               },
               {
@@ -43,44 +36,38 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeaveDepot"
+                  "pathName": "GrabTheFuel"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BackAndScore"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "FARSHOOT"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "INTAKEUP"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 2.0
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "NEARSHOOT"
-                      }
-                    }
-                  ]
+                  "name": "SHAKE"
                 }
               }
             ]
