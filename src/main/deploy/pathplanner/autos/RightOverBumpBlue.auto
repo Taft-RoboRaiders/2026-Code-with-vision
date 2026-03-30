@@ -25,12 +25,6 @@
                 "data": {
                   "name": "INTAKEDOWN"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "INTAKE"
-                }
               }
             ]
           }
@@ -40,15 +34,41 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "parallel",
                 "data": {
-                  "pathName": "GrabTheFuel"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "GrabTheFuel"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "INTAKE"
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "path",
+                "type": "parallel",
                 "data": {
-                  "pathName": "BackAndScore"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "BackAndScore"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "INTAKE"
+                      }
+                    }
+                  ]
                 }
               }
             ]

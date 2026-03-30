@@ -25,12 +25,6 @@
                 "data": {
                   "name": "INTAKEDOWN"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "INTAKE"
-                }
               }
             ]
           }
@@ -40,15 +34,41 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "parallel",
                 "data": {
-                  "pathName": "GrabFuel"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "GrabFuel"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "INTAKE"
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "path",
+                "type": "parallel",
                 "data": {
-                  "pathName": "BackOverBump"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "BackOverBump"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "INTAKE"
+                      }
+                    }
+                  ]
                 }
               }
             ]
