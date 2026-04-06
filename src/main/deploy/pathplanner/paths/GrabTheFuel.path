@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 8.321754636233951,
-        "y": 0.41864479315264025
+        "y": 0.4186447931526402
       },
       "isLocked": true,
       "linkedName": null
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 8.458575161480967,
-        "y": 2.260200114743912
+        "y": 2.2602001147439115
       },
       "nextControl": {
         "x": 8.133179474752984,
@@ -55,7 +55,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 0.8,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 0.8,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -68,7 +68,7 @@
   "reversed": false,
   "folder": "BlueRIGHTBUMPPATHS",
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 1.0,
     "rotation": -114.62356478616351
   },
   "useDefaultConstraints": false

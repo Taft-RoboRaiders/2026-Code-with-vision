@@ -47,12 +47,12 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final        SwerveSubsystem          drivebase        = new SwerveSubsystem(driverXbox);
   SwerveInputStream driveRobotOriented = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                              () -> driverXbox.getLeftY() * 0.7,
-                                                              () -> driverXbox.getLeftX() * 0.7)
+                                                              () -> driverXbox.getLeftY() * 1,
+                                                              () -> driverXbox.getLeftX() * 1)
                                                           .withControllerRotationAxis(() -> driverXbox.getRawAxis(
                                                               4) * -0.7)
                                                           .deadband(OperatorConstants.DEADBAND)
-                                                          .scaleTranslation(0.6)
+                                                          .scaleTranslation(1)
                                                           .robotRelative(true);
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                 () -> driverXbox.getLeftY() * -1,
@@ -60,7 +60,7 @@ public class RobotContainer
                                                             .withControllerRotationAxis(() -> driverXbox.getRawAxis(
                                                                 4) * -1)
                                                             .deadband(OperatorConstants.DEADBAND)
-                                                            .scaleTranslation(0.8)
+                                                            .scaleTranslation(1)
                                                             .allianceRelativeControl(false);
   SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverXbox::getRightX,
                                                                                              driverXbox::getRightY)
@@ -102,13 +102,13 @@ public class RobotContainer
 
     //Set up auto commands
 
-    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(135)).withTimeout(5));
+    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(125)).withTimeout(5));
     NamedCommands.registerCommand("INTAKEUP", Intake.setAngle(Degrees.of(0)));
-    NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(1).withTimeout(5));
+    NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(1).withTimeout(6));
     NamedCommands.registerCommand("NOSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 0).withTimeout(2));
     NamedCommands.registerCommand("STOPINTAKE", IntakeSpin.runIntakeCommand(0));
-    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3700).withTimeout(12));
-    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3800).withTimeout(12));
+    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3750).withTimeout(12));
+    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3850).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
     NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake/* ,IntakeSpin*/).withTimeout(1));

@@ -30,11 +30,17 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "parallel",
+                "type": "named",
+                "data": {
+                  "name": "INTAKE"
+                }
+              },
+              {
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
@@ -44,50 +50,31 @@
                       }
                     },
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "INTAKE"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "parallel",
-                "data": {
-                  "commands": [
-                    {
                       "type": "path",
                       "data": {
                         "pathName": "BackAndScore"
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "parallel",
                       "data": {
-                        "name": "INTAKE"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "FARSHOOT"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "SHAKE"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "FARSHOOT"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "SHAKE"
                 }
               }
             ]

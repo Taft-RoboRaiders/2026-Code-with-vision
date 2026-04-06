@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 6.3938944365192585,
-        "y": 5.71055634807418
+        "x": 6.186875891583452,
+        "y": 5.723495007132667
       },
       "prevControl": {
-        "x": 6.3634715864150895,
-        "y": 5.462414352048639
+        "x": 6.43271041369472,
+        "y": 5.632924393723252
       },
       "nextControl": null,
       "isLocked": true,
@@ -55,21 +55,21 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 0.8,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 0.8,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.8,
+    "velocity": 1.0,
     "rotation": -43.15238973400547
   },
   "reversed": false,
   "folder": "BlueBUMPPATHS",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 109.89469092161518
+    "velocity": 1.0,
+    "rotation": 109.8946909216152
   },
   "useDefaultConstraints": false
 }
