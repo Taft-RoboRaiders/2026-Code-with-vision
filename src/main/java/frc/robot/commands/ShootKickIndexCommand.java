@@ -43,10 +43,10 @@ public class ShootKickIndexCommand extends Command
       new RecordedShot(Meters.of(4.06), RPM.of(3800), Second.of(1.01)),
       new RecordedShot(Meters.of(4.095096381790928), RPM.of(3900), Second.of(1.02)),
       new RecordedShot(Meters.of(4.13453), RPM.of(3800), Second.of(1.11)),
-      new RecordedShot(Meters.of(4.571), RPM.of(3850), Second.of(1.12)),
-      new RecordedShot(Meters.of(4.638), RPM.of(3850), Second.of(1.14)),
-      new RecordedShot(Meters.of(  5.057498750154967), RPM.of(3900), Second.of(1.14)),
-      new RecordedShot(Meters.of(5.652219475166091), RPM.of(4000), Second.of(1.21))
+      new RecordedShot(Meters.of(4.571), RPM.of(3800), Second.of(1.12)),
+      new RecordedShot(Meters.of(4.638), RPM.of(3800), Second.of(1.14)),
+      new RecordedShot(Meters.of(  5.057498750154967), RPM.of(3850), Second.of(1.14)),
+      new RecordedShot(Meters.of(5.652219475166091), RPM.of(3900), Second.of(1.21))
       
       
       

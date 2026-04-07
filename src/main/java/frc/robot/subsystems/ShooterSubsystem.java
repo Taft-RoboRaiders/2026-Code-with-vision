@@ -20,7 +20,7 @@ import yams.motorcontrollers.SmartMotorControllerConfig.ControlMode;
 import yams.motorcontrollers.SmartMotorControllerConfig.MotorMode;
 import yams.motorcontrollers.SmartMotorControllerConfig.TelemetryVerbosity;
 import yams.motorcontrollers.local.SparkWrapper;
-
+import edu.wpi.first.math.Pair;
 
 public class ShooterSubsystem extends SubsystemBase
 {
@@ -36,20 +36,26 @@ public class ShooterSubsystem extends SubsystemBase
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withMotorInverted(true)
       .withFeedforward(new SimpleMotorFeedforward(0.12,0.106,0.15))
+      .withSimFeedforward(new SimpleMotorFeedforward(0.12,0.15,5))
       .withClosedLoopController(0.015,0,0.04)
+      .withSimClosedLoopController(0.015, 0,0.04)
       .withTelemetry("FlywheelMotor2",TelemetryVerbosity.HIGH);
+      
 
   private final SmartMotorController motor2 = new SparkWrapper(flywheelMotor2, DCMotor.getNEO(1), motorConfig2);
   private final SmartMotorControllerConfig motorConfig = new SmartMotorControllerConfig(this)
       .withClosedLoopController(0.015, 0, 0.1)
+      .withSimClosedLoopController(0.015, 0, 0.1)
       .withGearing(new MechanismGearing(GearBox.fromReductionStages(1)))
       .withIdleMode(MotorMode.COAST)
       .withStatorCurrentLimit(Amps.of(80))
       .withMotorInverted(false)
       .withFeedforward(new SimpleMotorFeedforward(0.18, 0.104, 0.15))
+      .withSimFeedforward(new SimpleMotorFeedforward(0.18, 0.17, 1))
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withTelemetry("FlyWheelMotor",TelemetryVerbosity.HIGH)
-      .withLooselyCoupledFollowers(motor2);
+      .withFollowers(Pair.of(flywheelMotor2,false));
+      //.withLooselyCoupledFollowers(motor2);
   
   private final SmartMotorController motor  = new SparkWrapper(flywheelMotor, DCMotor.getNEO(1), motorConfig);
 
