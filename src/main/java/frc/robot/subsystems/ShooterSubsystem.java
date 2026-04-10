@@ -54,7 +54,7 @@ public class ShooterSubsystem extends SubsystemBase
       .withSimFeedforward(new SimpleMotorFeedforward(0.18, 0.17, 1))
       .withControlMode(ControlMode.CLOSED_LOOP)
       .withTelemetry("FlyWheelMotor",TelemetryVerbosity.HIGH)
-      .withFollowers(Pair.of(flywheelMotor2,false));
+      .withFollowers(Pair.of(flywheelMotor2,true));
       //.withLooselyCoupledFollowers(motor2);
   
   private final SmartMotorController motor  = new SparkWrapper(flywheelMotor, DCMotor.getNEO(1), motorConfig);
@@ -107,7 +107,7 @@ public class ShooterSubsystem extends SubsystemBase
   {
 
     motor.setDutyCycle(0);
-    motor2.setDutyCycle(0);
+    //motor2.setDutyCycle(0);
   }
 
   public void periodic()

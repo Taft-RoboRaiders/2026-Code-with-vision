@@ -118,19 +118,19 @@ public class ShootKickIndexCommand extends Command
     shooter.setTargetRPM(goalRPM1);
 
     AngularVelocity shooterRPM  = shooter.getFlywheel1Velocity();
-    AngularVelocity shooterRPM2 = shooter.getFlywheel2Velocity();
+    //AngularVelocity shooterRPM2 = shooter.getFlywheel2Velocity();
 
     boolean shooterReady = shootDebounce1.calculate(
         shooterRPM.isNear(
             RPM.of(goalRPM1),
             RPM.of(Constants.ShooterConstants.ShooterToleranceRPM)
                          )
-                                                   ) && shootDebounce2.calculate(
-        shooterRPM2.isNear(
+                                                   ); //&& shootDebounce2.calculate(
+       /*  shooterRPM2.isNear(
             RPM.of(goalRPM1),
             RPM.of(Constants.ShooterConstants.ShooterToleranceRPM)
-                          )
-                                                                                );
+                          ));*/
+                                                                                
 
     if (shooterReady)
     {

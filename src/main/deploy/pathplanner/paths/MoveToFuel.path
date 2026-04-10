@@ -47,7 +47,7 @@
   "reversed": false,
   "folder": "BlueBUMPPATHS",
   "idealStartingState": {
-    "velocity": 0.7,
+    "velocity": 1.0,
     "rotation": 131.63353933657018
   },
   "useDefaultConstraints": false
