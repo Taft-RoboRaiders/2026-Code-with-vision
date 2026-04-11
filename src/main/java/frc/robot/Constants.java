@@ -102,9 +102,9 @@ public final class Constants
   public static class ShooterConstants
   {
 
-    public static final double FARShooterGoalRPM   = 2600;
-    public static final double NEARShooterGoalRPM  = 3000;
-    public static final double ShooterToleranceRPM = 100;
+    public static final double FARShooterGoalRPM   = 3100;
+    public static final double NEARShooterGoalRPM  = 2700;
+    public static final double ShooterToleranceRPM = 50;
     public static final double Shooter_Speed       = -0.7;
     public static final double kShooterRampRate    = 0.1;
   }

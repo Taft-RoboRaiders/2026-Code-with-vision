@@ -102,13 +102,14 @@ public class RobotContainer
 
     //Set up auto commands
 
-    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(125)).withTimeout(5));
+    NamedCommands.registerCommand("INTAKEDOWN", Intake.setAngle(Degrees.of(125)).withTimeout(1.5));
     NamedCommands.registerCommand("INTAKEUP", Intake.setAngle(Degrees.of(0)));
-    NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(1).withTimeout(6));
+    NamedCommands.registerCommand("INTAKE", IntakeSpin.runIntakeCommand(1).withTimeout(4));
+    NamedCommands.registerCommand("INTAKECENTER", IntakeSpin.runIntakeCommand(1).withTimeout(8));
     NamedCommands.registerCommand("NOSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 0).withTimeout(2));
     NamedCommands.registerCommand("STOPINTAKE", IntakeSpin.runIntakeCommand(0));
-    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3750).withTimeout(12));
-    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 3850).withTimeout(12));
+    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2700).withTimeout(12));
+    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2850).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
     NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake/* ,IntakeSpin*/).withTimeout(1));
@@ -189,23 +190,29 @@ driverXbox.leftTrigger().whileFalse(IntakeSpin.runIntakeCommand(0));
 
 //SHOOTER KICKER INDEXER CONTROLS
 //AUTO RPM SHOOT
-    driverXbox.rightTrigger(0.2).whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
+   // driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter, Kicker, Indexer, drivebase));
    
     //SHOOT FROM TOWER
     driverXbox.x().whileTrue(new ShootKickIndexCommand(Shooter,
                                                                      Kicker,
                                                                      Indexer,
                                                                      Constants.ShooterConstants.FARShooterGoalRPM));
+                                                                     
     //SHOOT FROM CLOSE
-    driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter,
+    driverXbox.rightTrigger().whileTrue(new ShootKickIndexCommand(Shooter,
                                                        Kicker,
                                                        Indexer,
                                                        Constants.ShooterConstants.NEARShooterGoalRPM));
-
+driverXbox.b().whileTrue(new ShootKickIndexCommand(Shooter,
+                                                                     Kicker,
+                                                                     Indexer,
+                                                                     3500));
                                             
 //RESET HYRO FOR FOD
     driverXbox.start().and(driverXbox.back()).onTrue(drivebase.zeroGyroWtihAlliance());
 
+    driverXbox.povRight().whileTrue(Indexer.runIndexerCommand(1).alongWith(IntakeSpin.runIntakeCommand(-1))); //backup incase shooter encoders break
+    driverXbox.povRight().whileFalse(Indexer.runIndexerCommand(0).alongWith(IntakeSpin.runIntakeCommand(0))); //backup incase shooter encoders break
 
     //SHAKE COMMAND 
     driverXbox.pov(270).onTrue(ShakeIntake.shake(Intake));

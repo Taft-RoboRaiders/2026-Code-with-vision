@@ -30,7 +30,7 @@ public class IntakeToggleCommand extends Command {
 
         if (deployed) {
             // schedule the arm command ONCE
-            intake.setAngle(Degrees.of(130)).schedule();
+            intake.setAngle(Degrees.of(125)).schedule();
            // spin.runIntake(1);
         } else {
             intake.setAngle(Degrees.of(0)).schedule();
