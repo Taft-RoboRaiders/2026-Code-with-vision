@@ -13,6 +13,6 @@ public class ShakeIntake {
         return Commands.sequence(
                 intake.setAngle(Degrees.of(100)).withTimeout(0.5),
                 intake.setAngle(Degrees.of(20)).withTimeout(0.5)
-        ).repeatedly().withTimeout(5); // shake for 2.5 seconds
+        ).repeatedly().withTimeout(6); // shake for 6 seconds
     }
 }
