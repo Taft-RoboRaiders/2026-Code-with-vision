@@ -27,7 +27,7 @@ public class ShootKickIndexCommand extends Command
   private final KickerSubsystem           kicker;
   private final IndexerSubsystem          indexer;
   private final Optional<SwerveSubsystem> swerve;
-  private final double goalRPM;   // <-- parameter stored here
+  private final double goalRPM;   //parameter
   private final Debouncer shootDebounce1 = new Debouncer(1, DebounceType.kFalling);
   private final Debouncer shootDebounce2 = new Debouncer(1, DebounceType.kFalling);
   private final List<RecordedShot>         shots             = List.of(

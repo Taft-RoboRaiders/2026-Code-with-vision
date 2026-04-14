@@ -20,8 +20,8 @@
         "y": 2.372382310984309
       },
       "prevControl": {
-        "x": 3.1721683309557767,
-        "y": 2.8769900142653353
+        "x": 2.948792292757626,
+        "y": 2.5883270362089172
       },
       "nextControl": null,
       "isLocked": true,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.2,
-    "maxAcceleration": 2.2,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -47,7 +47,7 @@
   "reversed": false,
   "folder": "BlueRIGHTBUMPPATHS",
   "idealStartingState": {
-    "velocity": 0.0,
+    "velocity": 2.0,
     "rotation": 45.0
   },
   "useDefaultConstraints": false

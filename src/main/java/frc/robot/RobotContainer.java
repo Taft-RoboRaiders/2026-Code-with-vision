@@ -125,8 +125,10 @@ public class RobotContainer
     autoChooser.addOption("StraightAutoBLUE", AutoBuilder.buildAuto("StraightAutoBLUE"));
     autoChooser.addOption("DepotBlue", AutoBuilder.buildAuto("DepotBLUE"));
     autoChooser.addOption("CenterAutoLeftBumpBlue", AutoBuilder.buildAuto("BlueOverLeftBump"));
-        autoChooser.addOption("RightOverBumpBlue", AutoBuilder.buildAuto("RightOverBumpBlue"));
+    autoChooser.addOption("RightOverBumpBlue", AutoBuilder.buildAuto("RightOverBumpBlue"));
+    autoChooser.addOption("CenterDepotAuto", AutoBuilder.buildAuto("InFrontOfHubDepot"));
     autoChooser.addOption("Drive Forward", drivebase.driveForward().withTimeout(1)); //BASIC DRIVE FORWARD
+    
     //Put the autoChooser on the SmartDashboard
     SmartDashboard.putData("Auto Chooser", autoChooser);
 
