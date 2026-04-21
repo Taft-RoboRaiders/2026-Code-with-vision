@@ -29,7 +29,8 @@ public class AutoAimCommand extends Command
   {
     swerveInputStream.aim((new Pose2d(Hub.topCenterPoint.toTranslation2d(), Rotation2d.kZero)))
                      .aimWhile(true)
-                     .aimHeadingOffset(Rotation2d.k180deg)
+                     //.aimHeadingOffset(true)
+                     .aimHeadingOffset(Rotation2d.fromDegrees(-15))
                      .scaleTranslation(0.5);
 
   }

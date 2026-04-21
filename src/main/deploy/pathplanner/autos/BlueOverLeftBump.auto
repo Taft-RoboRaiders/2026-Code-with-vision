@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "CrossOverBump"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "MoveToFuel"
+                  "pathName": "CrossOverBump"
                 }
               },
               {
@@ -27,6 +21,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MoveToFuel"
           }
         },
         {

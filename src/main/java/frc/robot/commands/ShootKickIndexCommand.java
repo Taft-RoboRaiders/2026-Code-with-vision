@@ -28,8 +28,8 @@ public class ShootKickIndexCommand extends Command
   private final IndexerSubsystem          indexer;
   private final Optional<SwerveSubsystem> swerve;
   private final double goalRPM;   //parameter
-  private final Debouncer shootDebounce1 = new Debouncer(1, DebounceType.kFalling);
-  private final Debouncer shootDebounce2 = new Debouncer(1, DebounceType.kFalling);
+  private final Debouncer shootDebounce1 = new Debouncer(1.5, DebounceType.kFalling);
+  private final Debouncer shootDebounce2 = new Debouncer(1.5, DebounceType.kFalling);
   private final List<RecordedShot>         shots             = List.of(
       // TUNE HERE
       //NEED TO TUNE AGAIN WITH FLEX'S

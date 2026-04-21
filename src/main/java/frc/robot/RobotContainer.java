@@ -108,8 +108,8 @@ public class RobotContainer
     NamedCommands.registerCommand("INTAKECENTER", IntakeSpin.runIntakeCommand(1).withTimeout(8));
     NamedCommands.registerCommand("NOSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 0).withTimeout(2));
     NamedCommands.registerCommand("STOPINTAKE", IntakeSpin.runIntakeCommand(0));
-    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2700).withTimeout(12));
-    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2850).withTimeout(12));
+    NamedCommands.registerCommand("NEARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2750).withTimeout(12));
+    NamedCommands.registerCommand("FARSHOOT", new ShootKickIndexCommand(Shooter, Kicker, Indexer, 2800).withTimeout(12));
     NamedCommands.registerCommand("AUTOAIM",new AutoAimCommand(drivebase));
     NamedCommands.registerCommand("AUTOSHOOT",new ShootKickIndexCommand(Shooter, Kicker, Indexer,drivebase).withTimeout(12));
     NamedCommands.registerCommand("INTAKEONANDDOWN",new IntakeToggleCommand(Intake/* ,IntakeSpin*/).withTimeout(1));

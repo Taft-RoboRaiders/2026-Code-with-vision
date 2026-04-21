@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "GoOverBump"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "GoToFuel"
+                  "pathName": "GoOverBump"
                 }
               },
               {
@@ -27,6 +21,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "GoToFuel"
           }
         },
         {
